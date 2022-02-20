@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">GitHub-Trending-Reposotiry</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="language">Language :</string>
+    <string name="about">About</string>
+    <string name="visibility">Visibility :</string>
+    <string name="topics">Topics :</string>
+    <string name="created_at">Created at :</string>
+    <string name="updated_at">Updated at :</string>
+</resources>

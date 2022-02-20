@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/gitRepositoryListFragment">
+
+    <fragment
+        android:id="@+id/gitRepositoryListFragment"
+        android:name="com.example.github_trending_reposotiry.ui.fragment.git_repository_list.GitRepositoryListFragment"
+        android:label="fragment_git_repository_list"
+        tools:layout="@layout/fragment_git_repository_list" >
+        <action
+            android:id="@+id/action_gitRepositoryListFragment_to_gitRepositoryDetailsFragment"
+            app:destination="@id/gitRepositoryDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gitRepositoryDetailsFragment"
+        android:name="com.example.github_trending_reposotiry.ui.fragment.git_repository_details.GitRepositoryDetailsFragment"
+        android:label="fragment_git_repository_details"
+        tools:layout="@layout/fragment_git_repository_details" >
+        <argument
+            android:name="item"
+            app:argType="com.example.github_trending_reposotiry.ui.fragment.git_repository_list.model.Items" />
+    </fragment>
+
+
+</navigation>
