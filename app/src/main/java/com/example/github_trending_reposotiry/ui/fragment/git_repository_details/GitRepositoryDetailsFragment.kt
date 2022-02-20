@@ -19,7 +19,6 @@ class GitRepositoryDetailsFragment() : Fragment() {
 
     private lateinit var binding: FragmentGitRepositoryDetailsBinding
     private lateinit var itemsModel: Items
-    private val mCon = context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

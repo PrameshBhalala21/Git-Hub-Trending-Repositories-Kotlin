@@ -13,7 +13,7 @@ class BackGroundWorker(private val context: Context, params: WorkerParameters) :
     override fun doWork(): Result {
         val repository = (context as GitRepositoryApplication).gitRepository
         CoroutineScope(Dispatchers.IO).launch {
-            repository.getGitRepositoryListBackground()
+            repository.getGitRepositoryListBackground("language:kotlin")
         }
         return Result.success()
     }

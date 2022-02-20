@@ -9,6 +9,7 @@ import com.example.github_trending_reposotiry.db.dao.GitRepositoryDAO
 import com.example.github_trending_reposotiry.ui.fragment.git_repository_list.model.Items
 import com.example.github_trending_reposotiry.ui.fragment.git_repository_list.model.OwnerTypeConverter
 import com.example.github_trending_reposotiry.ui.fragment.git_repository_list.model.TopicsTypeConverter
+import javax.inject.Inject
 
 @Database(entities = [Items::class], version = 1)
 @TypeConverters(TopicsTypeConverter::class, OwnerTypeConverter::class)

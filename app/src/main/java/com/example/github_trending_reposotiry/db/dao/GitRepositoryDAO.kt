@@ -11,12 +11,6 @@ interface GitRepositoryDAO {
     @Insert
     fun insert(gitRepositoryDataModel: List<Items>)
 
-   /* @Update
-    fun update(gitRepositoryDataModel: GitRepositoryDataModel)
-
-    @Delete
-    fun delete(gitRepositoryDataModel: GitRepositoryDataModel)
-*/
     @Query("delete from items")
     fun deleteAllGitRepo()
 
@@ -24,6 +18,12 @@ interface GitRepositoryDAO {
     fun getAllGitRepoDetails(): List<Items>
 
     /*@Query("select * from git_repo order by watchersCount desc")
-    fun getAllNotes(): LiveData<List<GitRepositoryDataModel>>*/
+    fun getAllGitRepo(): LiveData<List<GitRepositoryDataModel>>
 
+    @Update
+    fun update(gitRepositoryDataModel: GitRepositoryDataModel)
+
+    @Delete
+    fun delete(gitRepositoryDataModel: GitRepositoryDataModel)
+*/
 }

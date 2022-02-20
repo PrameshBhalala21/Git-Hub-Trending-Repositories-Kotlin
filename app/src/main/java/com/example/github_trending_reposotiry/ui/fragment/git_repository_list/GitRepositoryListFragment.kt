@@ -17,15 +17,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.github_trending_reposotiry.GitRepositoryApplication
 import com.example.github_trending_reposotiry.R
 import com.example.github_trending_reposotiry.databinding.FragmentGitRepositoryListBinding
+import com.example.github_trending_reposotiry.di.DaggerApplicationComponent
 import com.example.github_trending_reposotiry.ui.fragment.git_repository_list.adapter.GitRepositoryListAdapter
 import com.example.github_trending_reposotiry.ui.fragment.git_repository_list.model.Items
 import com.example.github_trending_reposotiry.ui.fragment.git_repository_list.viewModel.GitRepositoryListViewModel
 import com.example.github_trending_reposotiry.utils.ViewModelFactory
+import javax.inject.Inject
 
 
 class GitRepositoryListFragment : Fragment() {
 
-    private lateinit var gitRepositoryListViewModel: GitRepositoryListViewModel
+    @Inject
+    lateinit var gitRepositoryListViewModel: GitRepositoryListViewModel
+
     private lateinit var binding: FragmentGitRepositoryListBinding
     private lateinit var adapter: GitRepositoryListAdapter
     private lateinit var navController: NavController
@@ -57,10 +61,16 @@ class GitRepositoryListFragment : Fragment() {
             initialize(view)
             gitRepositoryListViewModel.gitRepositoryAPIResponse.observe(this, Observer {
 
-                adapter.addList(it.items)
-                binding.gitRepoRecyclerView.adapter = adapter
-//                Toast.makeText(requireActivity(), it.items.size.toString(), Toast.LENGTH_LONG)
-//                    .show()
+                if (it.items.isNotEmpty()) {
+                    adapter.addList(it.items)
+                    binding.gitRepoRecyclerView.adapter = adapter
+                    binding.emptyTextView.visibility = View.GONE
+                    binding.recyclerViewLayout.visibility = View.VISIBLE
+                } else {
+                    binding.recyclerViewLayout.visibility = View.GONE
+                    binding.emptyTextView.visibility = View.VISIBLE
+
+                }
             })
 
             /* gitRepositoryListViewModel.gitRepositoryDatabaseData.observe(this, Observer {
@@ -71,9 +81,9 @@ class GitRepositoryListFragment : Fragment() {
             gitRepositoryListViewModel.gitLoaderResponse.observe(this, Observer {
                 if (it) {
                     binding.progress.visibility = View.VISIBLE
+                    binding.recyclerViewLayout.visibility = View.GONE
                 } else {
                     binding.progress.visibility = View.GONE
-
                 }
             })
 
@@ -92,8 +102,7 @@ class GitRepositoryListFragment : Fragment() {
         navController = Navigation.findNavController(view)
         binding.gitRepoRecyclerView.setHasFixedSize(true)
         binding.gitRepoRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
-        val gitRepository =
-            (requireActivity().application as GitRepositoryApplication).gitRepository
+        val gitRepository=(requireActivity().application as GitRepositoryApplication).gitRepository
 
         gitRepositoryListViewModel = ViewModelProvider(
             this,

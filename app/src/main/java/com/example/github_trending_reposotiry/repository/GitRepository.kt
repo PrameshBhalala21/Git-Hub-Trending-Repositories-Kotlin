@@ -9,8 +9,9 @@ import com.example.github_trending_reposotiry.network.ApiServices
 import com.example.github_trending_reposotiry.ui.fragment.git_repository_list.model.GitHubResponseModel
 import com.example.github_trending_reposotiry.ui.fragment.git_repository_list.model.Items
 import com.example.github_trending_reposotiry.utils.CheckInternetConnections
+import javax.inject.Inject
 
-class GitRepository(
+class GitRepository @Inject constructor(
     private val apiServices: ApiServices,
     private val gitRepositoryDataBase: GitRepositoryDataBase,
     private val applicationContext: Context
@@ -52,6 +53,7 @@ class GitRepository(
                     loadingLiveData.postValue(false)
                 }
             } else {
+                loadingLiveData.postValue(true)
                 val databaseList = gitRepositoryDataBase.gitRepositoryDao().getAllGitRepoDetails()
                 responseLiveData.postValue(GitHubResponseModel(0, false, databaseList))
                 loadingLiveData.postValue(false)
@@ -64,9 +66,15 @@ class GitRepository(
         }
     }
 
-    suspend fun getGitRepositoryListBackground(){
-        val randomNumber = (Math.random()*10).toInt()
-
+    suspend fun getGitRepositoryListBackground(query: String) {
+        val result = apiServices.getGitRepository(query)
+        if (result?.body() != null) {
+            if (result.code() == 200) {
+                gitRepositoryDataBase.gitRepositoryDao().deleteAllGitRepo()
+                gitRepositoryDataBase.gitRepositoryDao()
+                    .insert(result.body()!!.items)
+            }
+        }
 
     }
 

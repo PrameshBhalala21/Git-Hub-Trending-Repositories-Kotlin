@@ -6,8 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.github_trending_reposotiry.repository.GitRepository
 import com.example.github_trending_reposotiry.ui.fragment.git_repository_list.viewModel.GitRepositoryListViewModel
 import java.lang.IllegalArgumentException
+import javax.inject.Inject
 
-class ViewModelFactory(private val gitRepository: GitRepository) : ViewModelProvider.Factory {
+class ViewModelFactory @Inject constructor(private val gitRepository: GitRepository) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(GitRepositoryListViewModel::class.java)) {

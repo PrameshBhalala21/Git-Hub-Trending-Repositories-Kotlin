@@ -8,14 +8,33 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/gitRepoRecyclerView"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/recyclerViewLayout"
+            android:visibility="gone"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/gitRepoRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                tools:itemCount="5"
+                tools:listitem="@layout/row_git_repository_list" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/emptyTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            tools:itemCount="5"
-            tools:listitem="@layout/row_git_repository_list" />
+            android:textSize="24sp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="Empty List"
+            />
 
         <ProgressBar
             android:id="@+id/progress"
